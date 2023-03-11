@@ -17,7 +17,7 @@ int[] ReadInt(string text) // Ввод значений через пробел
 
 int Ackermann(int m, int n) // Функция Аккермана
 {
-    if (m == 0) return n + 1;
+    if (m == 0 && n >= 0) return n + 1; // дополнительное условие: n >= 0
     if (m > 0 && n == 0) return Ackermann(m - 1, 1);
     if (m > 0 && n > 0) return Ackermann(m - 1, Ackermann(m, n - 1));
     return -1;
@@ -28,8 +28,10 @@ int Ackermann(int m, int n) // Функция Аккермана
 Console.WriteLine();
 int[] numbers = ReadInt("Введите неотрицательные m и n функции Аккермана через пробел: ");
 
-Console.WriteLine();
-if (numbers[0] < 0 || numbers[1] < 0) Console.WriteLine("\t" + "Указаны неверные значения m и n!");
+int result = Ackermann(numbers[0], numbers[1]);
 
-else Console.WriteLine("\t" + $"m = {numbers[0]}, n = {numbers[1]} —> A(m,n) = {Ackermann(numbers[0], numbers[1])}");
+Console.WriteLine();
+if (result == -1) Console.WriteLine("\t" + "Указаны неверные значения m и n!");
+
+else Console.WriteLine("\t" + $"m = {numbers[0]}, n = {numbers[1]} —> A(m,n) = {result}");
 Console.WriteLine();
